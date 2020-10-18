@@ -28,8 +28,6 @@ export default {
 
     async create(req: Request, res: Response){
 
-
-
       const {
         name, 
         latitude,
@@ -43,6 +41,9 @@ export default {
       const orphanagesRepository = getRepository(Orphanage)
 
       const requestImages = req.files as Express.Multer.File[]
+
+      // console.table(requestImages)
+
       const images = requestImages.map(image => {
         return { path: image.filename }
       })  
@@ -54,7 +55,7 @@ export default {
         about,
         instructions,
         opening_hours,
-        open_on_weekends,
+        open_on_weekends: open_on_weekends === 'true',
         images
       }
 
